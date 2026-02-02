@@ -1,5 +1,7 @@
 extends Node
 
+const CITY = preload("res://_sound/city_sounds.mp3")
+
 const BEATING = preload("res://_sound/punch.mp3")
 const CHASE = preload("res://_sound/siren.mp3")
 const CAUGHT = preload("res://_sound/taser.mp3")
