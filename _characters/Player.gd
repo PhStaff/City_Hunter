@@ -58,10 +58,7 @@ func set_being_chased(is_chased):
 
 
 func _on_Criminal_Beatbox_body_entered(body):
-	if !masked:
-		return
-	
-	body.beatable = true
+	body.set_close_to_player(true)
 
 func _on_Criminal_Beatbox_body_exited(body):
-	body.beatable = false
+	body.set_close_to_player(false)

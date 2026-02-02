@@ -1309,7 +1309,7 @@ position = Vector2( 552, 56 )
 
 [node name="Cops" type="Node" parent="."]
 
-[node name="NPCs" type="Node" parent="."]
+[node name="Criminals" type="Node" parent="."]
 
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.5

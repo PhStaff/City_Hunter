@@ -8,6 +8,8 @@ onready var found_spr: = $Found
 
 onready var beaten_spr: = $Beaten
 
+onready var close_spr: = $Close
+
 export (int, LAYERS_2D_NAVIGATION) var nav_layer = 1
 
 var SPEED = 5
@@ -29,15 +31,12 @@ var path = null
 var path_idx = 0
 var arrival_tolerance = 5
 
-var beatable = false
+var close_to_player = false
 
 func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	if Input.is_action_just_pressed("player_action") and beatable:
-		beaten_up()
-	
 	if current_target == null:
 		set_new_goal()
 	
@@ -75,6 +74,10 @@ func set_new_goal():
 		current_target = POT_GOAL3.position
 	elif rand_nr == 3:
 		current_target = POT_GOAL4.position
+
+func set_close_to_player(close):
+	close_to_player = close
+	#close_spr.visible = close
 
 func beaten_up():
 	emit_signal("criminal_beaten")

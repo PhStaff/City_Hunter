@@ -6,7 +6,6 @@ const Cop = preload("res://_characters/Cop.tscn")
 
 onready var player: = $Player
 
-onready var cops: = $Cops
 onready var cooldown: = $Cooldown
 
 onready var start1: = $Starts/Start_Civ1
@@ -30,7 +29,8 @@ onready var goal_crim2: = $Crime_Spots/Goal_Crim2
 onready var goal_crim3: = $Crime_Spots/Goal_Crim3
 onready var goal_crim4: = $Crime_Spots/Goal_Crim4
 
-onready var npc_group: = $NPCs
+onready var cop_group: = $Cops
+onready var criminal_group: = $Criminals
 
 onready var crime_text: = $Textlabels/Crime_Counter
 onready var game_over_text: = $Textlabels/Game_Over
@@ -56,6 +56,8 @@ var game_won = false
 var tutorial = true
 
 func _ready():
+	Soundplayer.play_sound(Soundplayer.CITY)
+	
 	if tutorial:
 		tutorial_pic.visible = true
 
@@ -74,6 +76,13 @@ func _process(delta):
 		if Input.is_action_just_pressed("game_restart"):
 			get_tree().reload_current_scene()
 	
+	if Input.is_action_just_pressed("player_action") and player.masked:
+		for criminal in criminal_group.get_children():
+			if !criminal.close_to_player:
+				continue
+			
+			criminal.beaten_up()
+	
 	spawn_civ()
 	spawn_crim()
 	spawn_cop()
@@ -85,7 +94,6 @@ func spawn_civ():
 	var rand_nr
 	var new_civ = Civ.instance()
 	add_child(new_civ)
-	#npc_group.add_child(new_civ)
 	assign_start_point(set_random_point(), new_civ)
 	assign_goal_civ_point(set_random_point(), new_civ)
 	
@@ -102,8 +110,8 @@ func spawn_crim():
 	
 	var rand_nr
 	var new_crim = Crim.instance()
-	#npc_group.add_child(new_crim)
-	add_child(new_crim)
+	criminal_group.add_child(new_crim)
+	#add_child(new_crim)
 	assign_start_point(set_random_point(), new_crim)
 	assign_goal_crim_point(set_random_point(), new_crim)
 	new_crim.POT_GOAL1 = goal_crim1
@@ -124,7 +132,7 @@ func spawn_cop():
 	
 	var rand_nr
 	var new_cop = Cop.instance()
-	cops.add_child(new_cop)
+	cop_group.add_child(new_cop)
 	assign_start_point(set_random_point(), new_cop)
 	new_cop.POT_GOAL1 = goal_cop1
 	new_cop.POT_GOAL2 = goal_cop2
@@ -218,7 +226,7 @@ func _on_Civ_player_found():
 	player.set_being_chased(true)
 	Soundplayer.play_sound(Soundplayer.CHASE)
 	
-	for cop in cops.get_children():
+	for cop in cop_group.get_children():
 		if !cop.chases_player:
 			alarmed_cops += 1
 		
