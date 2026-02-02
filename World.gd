@@ -56,8 +56,6 @@ var game_won = false
 var tutorial = true
 
 func _ready():
-	Soundplayer.play_sound(Soundplayer.CITY)
-	
 	if tutorial:
 		tutorial_pic.visible = true
 
