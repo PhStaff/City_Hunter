@@ -14,6 +14,15 @@ const CAUGHT = preload("res://_sound/taser.mp3")
 
 onready var audioPlayers: = $AudioPlayers
 
+var play_city = false
+
+func play_sound_city():
+	if play_city:
+		return
+	
+	play_city = true
+	play_sound(CITY)
+
 func play_sound(sound):
 	for audioStreamPlayer in audioPlayers.get_children():
 		if not audioStreamPlayer.playing:
