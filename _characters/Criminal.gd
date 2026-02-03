@@ -12,24 +12,14 @@ onready var close_spr: = $Close
 
 export (int, LAYERS_2D_NAVIGATION) var nav_layer = 1
 
-var SPEED = 5
+var SPEED = 1
+var ARRIVAL_TOLERANCE = 5
 var START_POINT = null
-var GOAL_POINT = null
 
-var POT_GOAL1 = null
-var POT_GOAL2 = null
-var POT_GOAL3 = null
-var POT_GOAL4 = null
-
-var START = 0
-var GOAL = 1
-
-var current_des = GOAL
 var current_target = null
 
 var path = null 
 var path_idx = 0
-var arrival_tolerance = 5
 
 var close_to_player = false
 
@@ -50,7 +40,7 @@ func move_towards_goal(delta):
 	var movement = direction * SPEED
 	move_and_collide(movement)
 	
-	if global_position.distance_to(path[path_idx]) <= arrival_tolerance:
+	if global_position.distance_to(path[path_idx]) <= ARRIVAL_TOLERANCE:
 		path_idx += 1
 	
 	if path_idx == path.size():
@@ -63,21 +53,9 @@ func set_new_path():
 func set_new_goal():
 	path = null
 	emit_signal("new_goal", self)
-	return
-	
-	var rand_nr = randi() % 4
-	if rand_nr == 0:
-		current_target = POT_GOAL1.position
-	elif rand_nr == 1:
-		current_target = POT_GOAL2.position
-	elif rand_nr == 2:
-		current_target = POT_GOAL3.position
-	elif rand_nr == 3:
-		current_target = POT_GOAL4.position
 
 func set_close_to_player(close):
 	close_to_player = close
-	#close_spr.visible = close
 
 func beaten_up():
 	emit_signal("criminal_beaten")

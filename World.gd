@@ -8,26 +8,11 @@ onready var player: = $Player
 
 onready var cooldown: = $Cooldown
 
-onready var start1: = $Starts/Start_Civ1
-onready var start2: = $Starts/Start_Civ2
-onready var start3: = $Starts/Start_Civ3
-onready var start4: = $Starts/Start_Civ4
+onready var start_points: = $Starts
 
-onready var goal1: = $Goals/Goal_Civ1
-onready var goal2: = $Goals/Goal_Civ2
-onready var goal3: = $Goals/Goal_Civ3
-onready var goal4: = $Goals/Goal_Civ4
-
-onready var goal_cop1: = $Goals/Goal_Cop1
-onready var goal_cop2: = $Goals/Goal_Cop2
-onready var goal_cop3: = $Goals/Goal_Cop3
-onready var goal_cop4: = $Goals/Goal_Cop4
-
+onready var civ_goals: = $Civ_Goals
+onready var cop_stations: = $Cop_Stations
 onready var crime_spots: = $Crime_Spots
-onready var goal_crim1: = $Crime_Spots/Goal_Crim1
-onready var goal_crim2: = $Crime_Spots/Goal_Crim2
-onready var goal_crim3: = $Crime_Spots/Goal_Crim3
-onready var goal_crim4: = $Crime_Spots/Goal_Crim4
 
 onready var cop_group: = $Cops
 onready var criminal_group: = $Criminals
@@ -56,7 +41,6 @@ var game_won = false
 var tutorial = true
 
 func _ready():
-	#Soundplayer.play_sound(Soundplayer.CITY)
 	Soundplayer.play_sound_city()
 	
 	if tutorial:
@@ -91,14 +75,11 @@ func _process(delta):
 func spawn_civ():
 	if civ_current > CIV_LIMIT:
 		return
-	
-	var rand_nr
+
 	var new_civ = Civ.instance()
 	add_child(new_civ)
-	assign_start_point(set_random_point(), new_civ)
-	assign_goal_civ_point(set_random_point(), new_civ)
-	
-	new_civ.SPEED = randi() % 4 + 1
+	assign_start_point(new_civ)
+	assign_goal_civ_point(new_civ)
 	
 	civ_current += 1
 	
@@ -109,18 +90,10 @@ func spawn_crim():
 		crim_spawning = false
 		return
 	
-	var rand_nr
 	var new_crim = Crim.instance()
 	criminal_group.add_child(new_crim)
-	#add_child(new_crim)
-	assign_start_point(set_random_point(), new_crim)
-	assign_goal_crim_point(set_random_point(), new_crim)
-	new_crim.POT_GOAL1 = goal_crim1
-	new_crim.POT_GOAL2 = goal_crim2
-	new_crim.POT_GOAL3 = goal_crim3
-	new_crim.POT_GOAL4 = goal_crim4
-	
-	new_crim.SPEED = 1
+	assign_start_point(new_crim)
+	assign_goal_crim_point(new_crim)
 	
 	crim_current += 1
 	
@@ -131,62 +104,37 @@ func spawn_cop():
 	if cop_current > COP_LIMIT:
 		return
 	
-	var rand_nr
 	var new_cop = Cop.instance()
 	cop_group.add_child(new_cop)
-	assign_start_point(set_random_point(), new_cop)
-	new_cop.POT_GOAL1 = goal_cop1
-	new_cop.POT_GOAL2 = goal_cop2
-	new_cop.POT_GOAL3 = goal_cop3
-	new_cop.POT_GOAL4 = goal_cop4
-	
-	new_cop.SPEED = 2
+	assign_start_point(new_cop)
 	
 	cop_current += 1
 	
 	new_cop.connect("ended_chase", self, "_on_Cop_ended_chase")
 	new_cop.connect("player_caught", self, "_on_Cop_caught_player")
+	new_cop.connect("new_goal_cop", self, "_on_Cop_new_goal")
 
-func set_random_point():
-	return randi() % 4
+func assign_start_point(npc):
+	var node_number = cop_stations.get_child_count()
+	var start_point = start_points.get_child(randi() % node_number)
+	npc.position = start_point.position
+	npc.START_POINT = start_point.position
 
-func assign_start_point(rand_nr, new_civ):
-	if rand_nr == 0:
-		new_civ.position = start1.position
-		new_civ.START_POINT = start1.position
-	elif rand_nr == 1:
-		new_civ.position = start2.position
-		new_civ.START_POINT = start2.position
-	elif rand_nr == 2:
-		new_civ.position = start3.position
-		new_civ.START_POINT = start3.position
-	elif rand_nr == 3:
-		new_civ.position = start4.position
-		new_civ.START_POINT = start4.position
+func assign_goal_civ_point(npc):
+	var node_number = civ_goals.get_child_count()
+	var goal = civ_goals.get_child(randi() % node_number)
+	npc.GOAL_POINT = goal.position
 
-func assign_goal_civ_point(rand_nr, new_civ):
-	if rand_nr == 0:
-		new_civ.GOAL_POINT = goal1.position
-	elif rand_nr == 1:
-		new_civ.GOAL_POINT = goal2.position
-	elif rand_nr == 2:
-		new_civ.GOAL_POINT = goal3.position
-	elif rand_nr == 3:
-		new_civ.GOAL_POINT = goal4.position
-
-func assign_goal_crim_point(rand_nr, new_civ):
-	if rand_nr == closest_crime_spot():
-		rand_nr = (rand_nr + 1) % 4
+func assign_goal_crim_point(npc):
+	var node_number = crime_spots.get_child_count()
+	var rand = randi() % node_number
 	
-	if rand_nr == 0:
-		new_civ.current_target = goal_crim1.position
-	elif rand_nr == 1:
-		new_civ.current_target = goal_crim2.position
-	elif rand_nr == 2:
-		new_civ.current_target = goal_crim3.position
-	elif rand_nr == 3:
-		new_civ.current_target = goal_crim4.position
-
+	if rand == closest_crime_spot():
+		rand = (rand + 1) % node_number
+	
+	var goal = crime_spots.get_child(rand)
+	npc.current_target = goal.position
+ 
 func closest_crime_spot():
 	if !is_instance_valid(player):
 		return 5
@@ -206,15 +154,10 @@ func closest_crime_spot():
 	
 	return index_return
 
-func assign_goal_cop_point(rand_nr, new_civ):
-	if rand_nr == 0:
-		new_civ.GOAL_POINT = goal_cop1.position
-	elif rand_nr == 1:
-		new_civ.GOAL_POINT = goal_cop2.position
-	elif rand_nr == 2:
-		new_civ.GOAL_POINT = goal_cop3.position
-	elif rand_nr == 3:
-		new_civ.GOAL_POINT = goal_cop4.position
+func assign_goal_cop_point(npc):
+	var node_number = cop_stations.get_child_count()
+	var goal = cop_stations.get_child(randi() % node_number)
+	npc.current_target = goal.position
 
 
 func _on_Civ_player_found():
@@ -256,7 +199,10 @@ func _on_Crim_beaten_up():
 		restart_text.visible = true
 
 func _on_Crim_new_goal(crim):
-	assign_goal_crim_point(set_random_point(), crim)
+	assign_goal_crim_point(crim)
+
+func _on_Cop_new_goal(cop):
+	assign_goal_cop_point(cop)
 
 func _on_Cop_caught_player():
 	if game_won:

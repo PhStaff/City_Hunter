@@ -2,29 +2,20 @@ extends KinematicBody2D
 
 signal ended_chase
 signal player_caught
+signal new_goal_cop(cop)
 
 export (int, LAYERS_2D_NAVIGATION) var nav_layer = 1
 
 onready var alert_spr: = $Alert
 
-var SPEED = 5
+var SPEED = 2
+var ARRIVAL_TOLERANCE = 5
 var START_POINT = null
-var GOAL_POINT = null
 
-var POT_GOAL1 = null
-var POT_GOAL2 = null
-var POT_GOAL3 = null
-var POT_GOAL4 = null
-
-var START = 0
-var GOAL = 1
-
-var current_des = GOAL
 var current_target = null
 
 var path = null 
 var path_idx = 0
-var arrival_tolerance = 5
 
 var chases_player = false
 
@@ -34,9 +25,6 @@ func _ready():
 func _process(delta):
 	if current_target == null:
 		set_new_goal()
-	
-	#if Input.is_action_just_pressed("player_space"):
-		#set_chasing_player(!alert_spr.visible)
 	
 	if not path:
 		set_new_path()
@@ -58,7 +46,7 @@ func move_towards_goal():
 	var movement = direction * SPEED
 	move_and_collide(movement)
 	
-	if global_position.distance_to(path[path_idx]) <= arrival_tolerance:
+	if global_position.distance_to(path[path_idx]) <= ARRIVAL_TOLERANCE:
 		path_idx += 1
 	
 	#Goal reached
@@ -75,16 +63,7 @@ func set_new_path():
 
 func set_new_goal():
 	path = null
-	
-	var rand_nr = randi() % 4
-	if rand_nr == 0:
-		current_target = POT_GOAL1.position
-	elif rand_nr == 1:
-		current_target = POT_GOAL2.position
-	elif rand_nr == 2:
-		current_target = POT_GOAL3.position
-	elif rand_nr == 3:
-		current_target = POT_GOAL4.position
+	emit_signal("new_goal_cop", self)
 
 
 func _on_Kill_Player_body_entered(body):

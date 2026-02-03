@@ -1265,32 +1265,35 @@ position = Vector2( 560, 456 )
 [node name="Start_Civ4" parent="Starts" instance=ExtResource( 4 )]
 position = Vector2( 552, 104 )
 
-[node name="Goals" type="Node2D" parent="."]
+[node name="Civ_Goals" type="Node2D" parent="."]
 visible = false
 
-[node name="Goal_Civ1" parent="Goals" instance=ExtResource( 5 )]
+[node name="Goal_Civ1" parent="Civ_Goals" instance=ExtResource( 5 )]
 position = Vector2( 480, 504 )
 
-[node name="Goal_Civ2" parent="Goals" instance=ExtResource( 5 )]
+[node name="Goal_Civ2" parent="Civ_Goals" instance=ExtResource( 5 )]
 position = Vector2( 752, 392 )
 
-[node name="Goal_Civ3" parent="Goals" instance=ExtResource( 5 )]
+[node name="Goal_Civ3" parent="Civ_Goals" instance=ExtResource( 5 )]
 position = Vector2( 736, 168 )
 
-[node name="Goal_Civ4" parent="Goals" instance=ExtResource( 5 )]
+[node name="Goal_Civ4" parent="Civ_Goals" instance=ExtResource( 5 )]
 position = Vector2( 64, 200 )
 
-[node name="Goal_Cop1" parent="Goals" instance=ExtResource( 6 )]
-position = Vector2( 152, 528 )
+[node name="Cop_Stations" type="Node2D" parent="."]
+visible = false
 
-[node name="Goal_Cop2" parent="Goals" instance=ExtResource( 6 )]
-position = Vector2( 96, 88 )
+[node name="Goal_Cop1" parent="Cop_Stations" instance=ExtResource( 6 )]
+position = Vector2( 152, 536 )
 
-[node name="Goal_Cop3" parent="Goals" instance=ExtResource( 6 )]
-position = Vector2( 232, 480 )
+[node name="Goal_Cop2" parent="Cop_Stations" instance=ExtResource( 6 )]
+position = Vector2( 88, 88 )
 
-[node name="Goal_Cop4" parent="Goals" instance=ExtResource( 6 )]
-position = Vector2( 608, 232 )
+[node name="Goal_Cop3" parent="Cop_Stations" instance=ExtResource( 6 )]
+position = Vector2( 232, 488 )
+
+[node name="Goal_Cop4" parent="Cop_Stations" instance=ExtResource( 6 )]
+position = Vector2( 752, 200 )
 
 [node name="Crime_Spots" type="Node2D" parent="."]
 visible = false
