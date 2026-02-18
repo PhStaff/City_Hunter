@@ -4,25 +4,25 @@ const Civ = preload("res://_characters/Civ.tscn")
 const Crim = preload("res://_characters/Criminal.tscn")
 const Cop = preload("res://_characters/Cop.tscn")
 
-onready var player: = $Player
+@onready var player: = $Player
 
-onready var cooldown: = $Cooldown
+@onready var cooldown: = $Cooldown
 
-onready var start_points: = $Starts
+@onready var start_points: = $Starts
 
-onready var civ_goals: = $Civ_Goals
-onready var cop_stations: = $Cop_Stations
-onready var crime_spots: = $Crime_Spots
+@onready var civ_goals: = $Civ_Goals
+@onready var cop_stations: = $Cop_Stations
+@onready var crime_spots: = $Crime_Spots
 
-onready var cop_group: = $Cops
-onready var criminal_group: = $Criminals
+@onready var cop_group: = $Cops
+@onready var criminal_group: = $Criminals
 
-onready var crime_text: = $Textlabels/Crime_Counter
-onready var game_over_text: = $Textlabels/Game_Over
-onready var game_beaten_text: = $Textlabels/Game_Beaten
-onready var restart_text: = $Textlabels/Restart
+@onready var crime_text: = $Textlabels/Crime_Counter
+@onready var game_over_text: = $Textlabels/Game_Over
+@onready var game_beaten_text: = $Textlabels/Game_Beaten
+@onready var restart_text: = $Textlabels/Restart
 
-onready var tutorial_pic: = $Tutorial
+@onready var tutorial_pic: = $Tutorial
 
 var CIV_LIMIT = 200
 var COP_LIMIT = 10
@@ -61,12 +61,8 @@ func _process(delta):
 		if Input.is_action_just_pressed("game_restart"):
 			get_tree().reload_current_scene()
 	
-	if Input.is_action_just_pressed("player_action") and player.masked:
-		for criminal in criminal_group.get_children():
-			if !criminal.close_to_player:
-				continue
-			
-			criminal.beaten_up()
+	if Input.is_action_just_pressed("player_action"):
+		player_action_beating()
 	
 	spawn_civ()
 	spawn_crim()
@@ -76,43 +72,43 @@ func spawn_civ():
 	if civ_current > CIV_LIMIT:
 		return
 
-	var new_civ = Civ.instance()
+	var new_civ = Civ.instantiate()
 	add_child(new_civ)
 	assign_start_point(new_civ)
 	assign_goal_civ_point(new_civ)
 	
 	civ_current += 1
 	
-	new_civ.connect("player_found", self, "_on_Civ_player_found")
+	new_civ.connect("player_found", Callable(self, "_on_Civ_player_found"))
 
 func spawn_crim():
 	if crim_current > CRIM_LIMIT or !crim_spawning:
 		crim_spawning = false
 		return
 	
-	var new_crim = Crim.instance()
+	var new_crim = Crim.instantiate()
 	criminal_group.add_child(new_crim)
 	assign_start_point(new_crim)
 	assign_goal_crim_point(new_crim)
 	
 	crim_current += 1
 	
-	new_crim.connect("criminal_beaten", self, "_on_Crim_beaten_up")
-	new_crim.connect("new_goal", self, "_on_Crim_new_goal")
+	new_crim.connect("criminal_beaten", Callable(self, "_on_Crim_beaten_up"))
+	new_crim.connect("new_goal", Callable(self, "_on_Crim_new_goal"))
 
 func spawn_cop():
 	if cop_current > COP_LIMIT:
 		return
 	
-	var new_cop = Cop.instance()
+	var new_cop = Cop.instantiate()
 	cop_group.add_child(new_cop)
 	assign_start_point(new_cop)
 	
 	cop_current += 1
 	
-	new_cop.connect("ended_chase", self, "_on_Cop_ended_chase")
-	new_cop.connect("player_caught", self, "_on_Cop_caught_player")
-	new_cop.connect("new_goal_cop", self, "_on_Cop_new_goal")
+	new_cop.connect("ended_chase", Callable(self, "_on_Cop_ended_chase"))
+	new_cop.connect("player_caught", Callable(self, "_on_Cop_caught_player"))
+	new_cop.connect("new_goal_cop", Callable(self, "_on_Cop_new_goal"))
 
 func assign_start_point(npc):
 	var node_number = cop_stations.get_child_count()
@@ -158,6 +154,16 @@ func assign_goal_cop_point(npc):
 	var node_number = cop_stations.get_child_count()
 	var goal = cop_stations.get_child(randi() % node_number)
 	npc.current_target = goal.position
+
+func player_action_beating():
+	if !find_child("Player"):
+		return
+	if !player.masked:
+		return
+		
+	for criminal in criminal_group.get_children():
+		if criminal.close_to_player:
+			criminal.beaten_up()
 
 
 func _on_Civ_player_found():

@@ -1,12 +1,12 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 signal ended_chase
 signal player_caught
 signal new_goal_cop(cop)
 
-export (int, LAYERS_2D_NAVIGATION) var nav_layer = 1
+@export var nav_layer = 1 # (int, LAYERS_2D_NAVIGATION)
 
-onready var alert_spr: = $Alert
+@onready var alert_spr: = $Alert
 
 var SPEED = 2
 var ARRIVAL_TOLERANCE = 5
@@ -58,7 +58,7 @@ func move_towards_goal():
 			emit_signal("ended_chase")
 
 func set_new_path():
-	path = Navigation2DServer.map_get_path(get_world_2d().navigation_map, global_position, current_target, false, nav_layer)
+	path = NavigationServer2D.map_get_path(get_world_2d().navigation_map, global_position, current_target, false, nav_layer)
 	path_idx = 0
 
 func set_new_goal():

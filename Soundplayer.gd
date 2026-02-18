@@ -12,7 +12,7 @@ const CAUGHT = preload("res://_sound/taser.mp3")
 
 #const TEST = preload("res://_sound/test.wav")
 
-onready var audioPlayers: = $AudioPlayers
+@onready var audioPlayers: = $AudioPlayers
 
 var play_city = false
 

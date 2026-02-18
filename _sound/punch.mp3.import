@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/punch.mp3-d35e5e6543b1c8b790309fd11d31e450.mp3str"
+uid="uid://chet7x1r1q2vs"
+path="res://.godot/imported/punch.mp3-d35e5e6543b1c8b790309fd11d31e450.mp3str"
 
 [deps]
 
 source_file="res://_sound/punch.mp3"
-dest_files=[ "res://.import/punch.mp3-d35e5e6543b1c8b790309fd11d31e450.mp3str" ]
+dest_files=["res://.godot/imported/punch.mp3-d35e5e6543b1c8b790309fd11d31e450.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

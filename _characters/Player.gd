@@ -1,9 +1,9 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var masked_spr: = $Masked
-onready var unmasked_spr: = $Unmasked
+@onready var masked_spr: = $Masked
+@onready var unmasked_spr: = $Unmasked
 
-onready var alert_spr: = $Alert
+@onready var alert_spr: = $Alert
 
 var SPEED = 100
 
@@ -34,7 +34,8 @@ func move():
 	
 	direction = input * SPEED
 	
-	move_and_slide(direction)
+	set_velocity(direction)
+	move_and_slide()
 
 func masking():
 	if masked:

@@ -1,12 +1,12 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 signal player_found
 
-export (int, LAYERS_2D_NAVIGATION) var nav_layer = 1
+@export var nav_layer = 1 # (int, LAYERS_2D_NAVIGATION)
 
-onready var alert_spr: = $Alert
+@onready var alert_spr: = $Alert
 
-var SPEED = randi() % 5
+var SPEED = randi() % 3 + 1
 var ARRIVAL_TOLERANCE = 5
 var START_POINT = null
 var GOAL_POINT = null
@@ -41,7 +41,7 @@ func move_towards_goal():
 			path_idx += (1 * path_dir)
 
 func set_new_path():
-	path = Navigation2DServer.map_get_path(get_world_2d().navigation_map, global_position, current_target, false, nav_layer)
+	path = NavigationServer2D.map_get_path(get_world_2d().navigation_map, global_position, current_target, false, nav_layer)
 	path_idx = 0
 
 func set_new_goal():

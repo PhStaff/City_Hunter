@@ -1,16 +1,14 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 signal criminal_beaten
 signal new_goal(crim)
 
-onready var hidden_spr: = $Hidden
-onready var found_spr: = $Found
+@onready var hidden_spr: = $Hidden
+@onready var found_spr: = $Found
+@onready var beaten_spr: = $Beaten
+@onready var close_spr: = $Close
 
-onready var beaten_spr: = $Beaten
-
-onready var close_spr: = $Close
-
-export (int, LAYERS_2D_NAVIGATION) var nav_layer = 1
+@export var nav_layer = 1 # (int, LAYERS_2D_NAVIGATION)
 
 var SPEED = 1
 var ARRIVAL_TOLERANCE = 5
@@ -47,7 +45,7 @@ func move_towards_goal(delta):
 		set_new_goal()
 
 func set_new_path():
-	path = Navigation2DServer.map_get_path(get_world_2d().navigation_map, global_position, current_target, false, nav_layer)
+	path = NavigationServer2D.map_get_path(get_world_2d().navigation_map, global_position, current_target, false, nav_layer)
 	path_idx = 0
 
 func set_new_goal():
