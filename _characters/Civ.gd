@@ -58,4 +58,4 @@ func _on_Player_Detection_body_entered(body):
 func _on_Player_Detection_body_exited(body):
 	emit_signal("player_gone", self)
 	
-	#alert_spr.visible = false
+	alert_spr.visible = false

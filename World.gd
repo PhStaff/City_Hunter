@@ -33,7 +33,7 @@ var cop_current = 0
 var crim_current = 0
 var crim_spawning = true
 
-var close_civs = 0
+var close_civs_array: Array[Node] = []
 var alarmed_cops = 0
 
 var game_over = false
@@ -172,6 +172,10 @@ func player_action_beating():
 func civ_found_player():
 	if game_won:
 		return
+	
+	for close_civ in close_civs_array:
+		close_civ.alert_spr.visible = true
+	
 	if !cooldown.is_stopped():
 		return
 	
@@ -188,7 +192,7 @@ func civ_found_player():
 
 
 func _on_civ_player_close(civ):
-	close_civs += 1
+	close_civs_array.append(civ)
 	
 	if game_won:
 		return
@@ -199,7 +203,7 @@ func _on_civ_player_close(civ):
 		civ_found_player()
 
 func _on_civ_player_gone(civ):
-	close_civs -= 1
+	close_civs_array.erase(civ)
 
 func _on_Cop_ended_chase():
 	alarmed_cops -= 1
@@ -238,5 +242,5 @@ func _on_Cop_caught_player():
 	restart_text.visible = true
 
 func _on_player_masking():
-	if close_civs > 0:
+	if !close_civs_array.is_empty():
 		civ_found_player()
