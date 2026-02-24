@@ -22,6 +22,7 @@ Soundplayer="*res://Soundplayer.tscn"
 [display]
 
 window/size/viewport_height=608
+window/stretch/aspect="expand"
 
 [gui]
 
