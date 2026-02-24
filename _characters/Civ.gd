@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-signal player_found
+signal player_close(civ)
+signal player_gone(civ)
 
 @export var nav_layer = 1 # (int, LAYERS_2D_NAVIGATION)
 
@@ -52,9 +53,9 @@ func set_new_goal():
 
 
 func _on_Player_Detection_body_entered(body):
-	if body.masked or body.being_chased:
-		emit_signal("player_found")
-		alert_spr.visible = true
+	emit_signal("player_close", self)
 
 func _on_Player_Detection_body_exited(body):
-	alert_spr.visible = false
+	emit_signal("player_gone", self)
+	
+	#alert_spr.visible = false

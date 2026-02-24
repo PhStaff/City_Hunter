@@ -9,7 +9,7 @@ var SPEED = 100
 
 var direction = Vector2.ZERO
 
-var masked = true
+var masked = false
 var being_chased = false
 
 var tutorial = true
@@ -22,9 +22,6 @@ func _process(delta):
 		return
 	
 	move()
-	
-	if Input.is_action_just_pressed("player_space"):
-		masking()
 
 func move(): 
 	var input = Vector2.ZERO

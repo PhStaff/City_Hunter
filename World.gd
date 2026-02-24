@@ -33,6 +33,7 @@ var cop_current = 0
 var crim_current = 0
 var crim_spawning = true
 
+var close_civs = 0
 var alarmed_cops = 0
 
 var game_over = false
@@ -64,6 +65,12 @@ func _process(delta):
 	if Input.is_action_just_pressed("player_action"):
 		player_action_beating()
 	
+	if Input.is_action_just_pressed("player_space") and is_instance_valid(player):
+		player.masking()
+		
+		if close_civs > 0:
+			civ_found_player()
+	
 	spawn_civ()
 	spawn_crim()
 	spawn_cop()
@@ -79,7 +86,8 @@ func spawn_civ():
 	
 	civ_current += 1
 	
-	new_civ.connect("player_found", Callable(self, "_on_Civ_player_found"))
+	new_civ.connect("player_close", Callable(self, "_on_civ_player_close"))
+	new_civ.connect("player_gone", Callable(self, "_on_civ_player_gone"))
 
 func spawn_crim():
 	if crim_current > CRIM_LIMIT or !crim_spawning:
@@ -165,11 +173,9 @@ func player_action_beating():
 		if criminal.close_to_player:
 			criminal.beaten_up()
 
-
-func _on_Civ_player_found():
+func civ_found_player():
 	if game_won:
 		return
-	
 	if !cooldown.is_stopped():
 		return
 	
@@ -181,9 +187,23 @@ func _on_Civ_player_found():
 			alarmed_cops += 1
 		
 		cop.chase_player(player.global_position)
-		#print(alarmed_cops)
 	
 	cooldown.start()
+
+
+func _on_civ_player_close(civ):
+	close_civs += 1
+	
+	if game_won:
+		return
+	if !cooldown.is_stopped():
+		return
+	
+	if player.masked or player.being_chased:
+		civ_found_player()
+
+func _on_civ_player_gone(civ):
+	close_civs -= 1
 
 func _on_Cop_ended_chase():
 	alarmed_cops -= 1
