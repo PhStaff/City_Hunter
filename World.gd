@@ -46,6 +46,8 @@ func _ready():
 	
 	if tutorial:
 		tutorial_pic.visible = true
+	
+	player.connect("player_masking", Callable(self, "_on_player_masking"))
 
 func _process(delta):
 	if tutorial:
@@ -64,12 +66,6 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("player_action"):
 		player_action_beating()
-	
-	if Input.is_action_just_pressed("player_space") and is_instance_valid(player):
-		player.masking()
-		
-		if close_civs > 0:
-			civ_found_player()
 	
 	spawn_civ()
 	spawn_crim()
@@ -240,3 +236,7 @@ func _on_Cop_caught_player():
 	game_over = true
 	game_over_text.visible = true
 	restart_text.visible = true
+
+func _on_player_masking():
+	if close_civs > 0:
+		civ_found_player()

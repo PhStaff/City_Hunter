@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal player_masking
+
 @onready var masked_spr: = $Masked
 @onready var unmasked_spr: = $Unmasked
 
@@ -9,7 +11,7 @@ var SPEED = 100
 
 var direction = Vector2.ZERO
 
-var masked = false
+var masked = true
 var being_chased = false
 
 var tutorial = true
@@ -22,6 +24,9 @@ func _process(delta):
 		return
 	
 	move()
+	
+	if Input.is_action_just_pressed("player_space"):
+		masking()
 
 func move(): 
 	var input = Vector2.ZERO
@@ -43,6 +48,7 @@ func masking():
 		
 		#Soundplayer.play_sound(Soundplayer.MASKED_OFF)
 	else:
+		emit_signal("player_masking")
 		masked = true
 		
 		masked_spr.visible = true
