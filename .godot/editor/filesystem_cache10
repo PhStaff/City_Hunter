@@ -1,7 +1,7 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1773063721
+::res://::1773092541
 default_env.tres::Environment::3356717802260113948::1773063359::0::1::::<><><>0<>0<><>::
-export_presets.cfg::TextFile::-1::1773063721::0::1::::<><><>0<>0<><>::
+export_presets.cfg::TextFile::-1::1773063811::0::1::::<><><>0<>0<><>::
 icon.png::CompressedTexture2D::1491061220165248498::1738339026::1770296907::1::::<><><>0<>0<>ab04539eab27828eb4532d5bdd579366<>res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex::
 README.md::TextFile::-1::1769951445::0::1::::<><><>0<>0<><>::
 Soundplayer.gd::GDScript::6779428879103118222::1770296876::0::1::::<>Node<><>0<>0<><>::
@@ -17,17 +17,12 @@ Criminal.gd::GDScript::7882114884489925350::1770296877::0::1::::<>CharacterBody2
 Criminal.tscn::PackedScene::-1::1770296877::0::1::::<><><>0<>0<><>::res://_characters/Criminal.gd<>res://_materials/npc_criminal.png<>res://_materials/npc_civ.png<>res://_materials/npc_criminal_beat.png
 Player.gd::GDScript::5690435948233957384::1771940214::0::1::::<>CharacterBody2D<><>0<>0<><>::
 Player.tscn::PackedScene::1003089840345544876::1770926616::0::1::::<><><>0<>0<><>::uid://8qmxcsf2uikg::::res://_materials/player_unmasked.png<>uid://cncqwb45g7xj1::::res://_characters/Player.gd<>uid://0inocy0th528::::res://_materials/player_masked.png<>uid://dabxqcjo7cqq::::res://_materials/npc_player_alert.png<>uid://bw6dnwpk5kqa5::::res://_materials/npc_player_ring.png
-::res://_exports/::1773063796
-::res://_exports/City Hunter/::1773063768
+::res://_exports/::1773063880
+::res://_exports/City Hunter/::1773063803
 index.apple-touch-icon.png::CompressedTexture2D::4143113541754996859::1773063721::1773063803::1::::<><><>0<>0<>3a206a2bae4bacba6fbadcce2a36931c<>res://.godot/imported/index.apple-touch-icon.png-1796668f5d7fdababd5f66b65d6db529.ctex::
 index.icon.png::CompressedTexture2D::7979721243420099894::1773063721::1773063803::1::::<><><>0<>0<>0527d89f6cab4df11f1e1117b6bb3c49<>res://.godot/imported/index.icon.png-cbea3fdb8269d5bd35a7d8a14dd8011f.ctex::
 index.png::CompressedTexture2D::7162754222503763250::1773063721::1773063803::1::::<><><>0<>0<>ac5691de4c7a36c7bbe298a6e03417e8<>res://.godot/imported/index.png-64cf044f1d5df82bf8e5debbdb7d31b1.ctex::
-::res://_exports/Neuer Ordner/::1773063545
-::res://_exports/Neuer Ordner/City Hunter/::1773063587
-index.apple-touch-icon.png::CompressedTexture2D::675293048517804114::1771181391::1773063587::1::::<><><>0<>0<>8d69f7c87f3c42eb0f5e8b12bde86cee<>res://.godot/imported/index.apple-touch-icon.png-f6e6eaaf873d2206a53a5fcae63c2d8c.ctex::
-index.icon.png::CompressedTexture2D::2238998446121053748::1771181391::1773063587::1::::<><><>0<>0<>4c5757ed2304010d280a34a96b0ef0f7<>res://.godot/imported/index.icon.png-3f284d10f64bf7410be0df1edbd270c4.ctex::
-index.png::CompressedTexture2D::1629173681636538016::1771181391::1773063587::1::::<><><>0<>0<>eef321e72ebd4eacaa48e0bd1448589d<>res://.godot/imported/index.png-2bb3738c1dc73c60be7bb9377f6b2391.ctex::
-::res://_exports/Neuer Ordner/City_Hunter_win/::1771405304
+::res://_exports/City Hunter - win/::1773063831
 ::res://_materials/::1771965927
 D-Con3.bmp::CompressedTexture2D::7627322943211563858::1697190477::1770296908::1::::<><><>0<>0<>9c31fbd57f2ae19ddaac5693243d494a<>res://.godot/imported/D-Con3.bmp-1cd1576e82e0e1e8f6558cd403871e64.ctex::
 D-Con3.ico::OtherFile::-1::1628867067::0::1::::<><><>0<>0<><>::

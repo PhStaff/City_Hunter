@@ -635,6 +635,16 @@ tile_set = SubResource("TileSet_f5c0m")
 [node name="Player" parent="." unique_id=1324388161 instance=ExtResource("2")]
 position = Vector2(344, 264)
 
+[node name="CameraAnker" type="RemoteTransform2D" parent="Player" unique_id=1505331374]
+remote_path = NodePath("../../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1917492069]
+position = Vector2(344, 264)
+limit_left = 0
+limit_top = 0
+limit_right = 1152
+limit_bottom = 608
+
 [node name="Starts" type="Node2D" parent="." unique_id=1700732672]
 visible = false
 

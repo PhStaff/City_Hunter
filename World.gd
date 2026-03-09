@@ -23,6 +23,7 @@ const Cop = preload("res://_characters/Cop.tscn")
 @onready var restart_text: = $Textlabels/Restart
 
 @onready var tutorial_pic: = $Tutorial
+@onready var camera = $Camera2D
 
 var CIV_LIMIT = 200
 var COP_LIMIT = 10
@@ -67,9 +68,20 @@ func _process(delta):
 	if Input.is_action_just_pressed("player_action"):
 		player_action_beating()
 	
+	camera_control()
+	
 	spawn_civ()
 	spawn_crim()
 	spawn_cop()
+
+func camera_control():
+	if (Input.is_action_just_pressed("mouse_up")):
+		camera.zoom.x = min(camera.zoom.x + 0.25, 2.00)
+		camera.zoom.y = min(camera.zoom.y + 0.25, 2.00)
+	elif (Input.is_action_just_pressed("mouse_down")):
+		camera.zoom.x = max(camera.zoom.x - 0.25, 1.00)
+		camera.zoom.y = max(camera.zoom.y - 0.25, 1.00)
+	print(camera.zoom)
 
 func spawn_civ():
 	if civ_current > CIV_LIMIT:
