@@ -40,9 +40,7 @@ func _ready() -> void:
 	#Following, masking and knocking out criminals
 	player.masking()
 	await cca("load_dialogue", ["MASKING_UP"])
-	
 	await cca("move_character", [player, 8 * Vector2(-11.0, 0.0), 1.75])
-	
 	await cca("load_dialogue", ["BEATING_CRIMINALS"])
 	criminal.beaten_up()
 	
@@ -51,13 +49,12 @@ func _ready() -> void:
 	await cca("move_character", [crowd, 8 * Vector2(0.0, -16.0), 1.5])
 	
 	#Alarm
+	set_crowd_alert(true)
 	await cca("load_dialogue", ["SPOTTED_MASKED"])
 	player.set_being_chased(true)
-	cop1.set_chasing_player(true)
-	cop2.set_chasing_player(true)
-	cop3.set_chasing_player(true)
+	set_police_chasing(true)
 	Soundplayer.play_sound(Soundplayer.CHASE)
-	
+	set_crowd_alert(false)
 	await cca("move_character", [crowd, 8 * Vector2(0.0, -13.0), 0.5])
 	
 	#Being spotted by civs while being chased
@@ -65,8 +62,10 @@ func _ready() -> void:
 	await cca("move_character", [crowd, 8 * Vector2(0.0, 13.0), 1.0])
 	
 	#Alarm
+	set_crowd_alert(true)
 	Soundplayer.play_sound(Soundplayer.CHASE)
 	await cca("load_dialogue", ["SPOTTED_CHASED"])
+	set_crowd_alert(false)
 	await cca("move_character", [crowd, 8 * Vector2(0.0, 13.0), 1.0])
 	await cca("load_dialogue", ["HIDE"])
 	
@@ -76,9 +75,7 @@ func _ready() -> void:
 	
 	#Being clear
 	player.set_being_chased(false)
-	cop1.set_chasing_player(false)
-	cop2.set_chasing_player(false)
-	cop3.set_chasing_player(false)
+	set_police_chasing(false)
 	
 	await cca("load_dialogue", ["CLEAR"])
 	await cca("move_character", [police, 8 * Vector2(0.0, 11.0), 2.5])
@@ -93,3 +90,13 @@ func _ready() -> void:
 	
 	#End
 	emit_signal("tutorial_end")
+
+func set_crowd_alert(are_alerted):
+	civ1.alert_spr.visible = are_alerted
+	civ2.alert_spr.visible = are_alerted
+	civ3.alert_spr.visible = are_alerted
+
+func set_police_chasing(are_chasing):
+	cop1.set_chasing_player(are_chasing)
+	cop2.set_chasing_player(are_chasing)
+	cop3.set_chasing_player(are_chasing)
