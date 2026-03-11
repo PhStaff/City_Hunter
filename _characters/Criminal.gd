@@ -33,7 +33,7 @@ func _process(delta):
 	else:
 		move_towards_goal(delta)
 
-func move_towards_goal(delta):
+func move_towards_goal(_delta):
 	var direction = (path[path_idx] - global_position).normalized()
 	var movement = direction * SPEED
 	move_and_collide(movement)
@@ -65,6 +65,6 @@ func beaten_up():
 	beaten_spr.visible = true
 
 
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(_body):
 	hidden_spr.visible = false
 	found_spr.visible = true

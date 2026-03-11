@@ -22,7 +22,7 @@ var chases_player = false
 func _ready():
 	pass # Replace with function body.
 
-func _process(delta):
+func _process(_delta):
 	if current_target == null:
 		set_new_goal()
 	

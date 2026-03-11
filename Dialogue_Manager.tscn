@@ -12,6 +12,7 @@ script = ExtResource("1_71kpd")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=843327454]
 
 [node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1815391464]
+visible = false
 offset_left = 232.0
 offset_top = 48.0
 offset_right = 840.0

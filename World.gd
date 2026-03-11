@@ -55,7 +55,7 @@ func _ready():
 	
 	player.connect("player_masking", Callable(self, "_on_player_masking"))
 
-func _process(delta):
+func _process(_delta):
 	if tutorial:
 		if Input.is_action_just_pressed("esc"):
 			_on_tutorial_end()

@@ -21,7 +21,7 @@ var path_dir = 1
 func _ready():
 	pass # Replace with function body.
 
-func _process(delta):
+func _process(_delta):
 	if current_target == null:
 		current_target = GOAL_POINT
 	
@@ -55,10 +55,10 @@ func set_new_goal():
 	path_dir *= -1
 
 
-func _on_Player_Detection_body_entered(body):
+func _on_Player_Detection_body_entered(_body):
 	emit_signal("player_close", self)
 
-func _on_Player_Detection_body_exited(body):
+func _on_Player_Detection_body_exited(_body):
 	emit_signal("player_gone", self)
 	
 	alert_spr.visible = false

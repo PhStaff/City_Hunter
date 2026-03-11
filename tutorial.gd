@@ -5,9 +5,9 @@ signal tutorial_end
 @onready var player = $Player
 
 @onready var crowd = $Crowd
-@onready var civ1 = $Civ1
-@onready var civ2 = $Civ2
-@onready var civ3 = $Civ3
+@onready var civ1 = $Crowd/Civ1
+@onready var civ2 = $Crowd/Civ2
+@onready var civ3 = $Crowd/Civ3
 
 @onready var police = $Police
 @onready var cop1 = $Police/Cop1
@@ -15,10 +15,7 @@ signal tutorial_end
 @onready var cop3 = $Police/Cop3
 @onready var criminal = $Criminal
 
-@onready var point_b: Marker2D = $PointB
-@onready var point_c: Marker2D = $PointC
-
-func _ready() -> void:	
+func _ready() -> void:
 	super()
 	
 	#Start
@@ -34,7 +31,6 @@ func _ready() -> void:
 	await cca("move_character", [player, 8 * Vector2(12.0, 0.0), 1.75])
 	await cca("load_dialogue", ["BEING_UNDETECTED"])
 	await cca("move_character", [crowd, 8 * Vector2(0.0, 25.0), 1.5])
-	
 	
 	#Detecting criminals
 	await cca("move_character", [criminal, 8 * Vector2(0.0, -9.0), 1.5])

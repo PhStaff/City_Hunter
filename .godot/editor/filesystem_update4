@@ -4,3 +4,8 @@ res://World.gd
 res://Dialogue_Manager.tscn
 res://dialogue_manager.gd
 res://tutorial.gd
+res://Tutorial.tscn
+res://_characters/Civ.gd
+res://_characters/Cop.gd
+res://_characters/Criminal.gd
+res://_characters/Player.gd

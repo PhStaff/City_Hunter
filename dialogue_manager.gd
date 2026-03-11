@@ -5,7 +5,7 @@ signal dialogue_done
 @onready var panel: = $CanvasLayer/Panel
 @onready var text_label: = $CanvasLayer/Panel/Text_Label
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("player_space"):
 		end_dialogue()
 
