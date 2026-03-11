@@ -1,3 +1,6 @@
 res://default_env.tres
 res://World.tscn
 res://World.gd
+res://Dialogue_Manager.tscn
+res://dialogue_manager.gd
+res://tutorial.gd

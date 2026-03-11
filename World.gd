@@ -22,7 +22,8 @@ const Cop = preload("res://_characters/Cop.tscn")
 @onready var game_beaten_text: = $Textlabels/Game_Beaten
 @onready var restart_text: = $Textlabels/Restart
 
-@onready var tutorial_pic: = $Tutorial
+@onready var tutorial_pic: = $Tutorial_Pic
+@onready var tutorial_scene: = $Tutorial
 @onready var camera = $Camera2D
 
 var CIV_LIMIT = 200
@@ -45,17 +46,19 @@ var tutorial = true
 func _ready():
 	Soundplayer.play_sound_city()
 	
-	if tutorial:
-		tutorial_pic.visible = true
+	camera.enabled = false
+	player.visible = false
+	tutorial_scene.connect("tutorial_end", Callable(self, "_on_tutorial_end"))
+	
+	#if tutorial:
+		#tutorial_pic.visible = true
 	
 	player.connect("player_masking", Callable(self, "_on_player_masking"))
 
 func _process(delta):
 	if tutorial:
-		if Input.is_action_just_pressed("player_space"):
-			player.tutorial = false
-			tutorial_pic.visible = false
-			tutorial = false
+		if Input.is_action_just_pressed("esc"):
+			_on_tutorial_end()
 		
 		return
 	
@@ -76,12 +79,13 @@ func _process(delta):
 
 func camera_control():
 	if (Input.is_action_just_pressed("mouse_up")):
-		camera.zoom.x = min(camera.zoom.x + 0.25, 2.00)
-		camera.zoom.y = min(camera.zoom.y + 0.25, 2.00)
+		camera.zoom.x = min(camera.zoom.x + 0.25, 3.00)
+		camera.zoom.y = min(camera.zoom.y + 0.25, 3.00)
 	elif (Input.is_action_just_pressed("mouse_down")):
 		camera.zoom.x = max(camera.zoom.x - 0.25, 1.00)
 		camera.zoom.y = max(camera.zoom.y - 0.25, 1.00)
-	print(camera.zoom)
+	
+	#print(camera.zoom)
 
 func spawn_civ():
 	if civ_current > CIV_LIMIT:
@@ -256,3 +260,10 @@ func _on_Cop_caught_player():
 func _on_player_masking():
 	if !close_civs_array.is_empty():
 		civ_found_player()
+
+func _on_tutorial_end():
+	tutorial = false
+	player.tutorial = false
+	camera.enabled = true
+	player.visible = true
+	tutorial_scene.queue_free()

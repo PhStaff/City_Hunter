@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://cdgvwkanb55v3"]
+
+[ext_resource type="Script" uid="uid://eqdvvyr7pret" path="res://tutorial.gd" id="1_jl26d"]
+[ext_resource type="PackedScene" uid="uid://oj50jbqkqtpc" path="res://_characters/Player.tscn" id="2_5s8la"]
+[ext_resource type="Texture2D" uid="uid://dvj7cr58su3lw" path="res://_materials/tut_back.JPG" id="2_hlpnd"]
+[ext_resource type="PackedScene" uid="uid://gbciclreug5" path="res://Dialogue_Manager.tscn" id="3_73or5"]
+[ext_resource type="PackedScene" uid="uid://cf1uw61vic3hb" path="res://_characters/Civ.tscn" id="3_p3v23"]
+[ext_resource type="PackedScene" path="res://_characters/Cop.tscn" id="4_hlpnd"]
+[ext_resource type="PackedScene" path="res://_characters/Criminal.tscn" id="5_73or5"]
+
+[node name="Tutorial" type="Node2D" unique_id=392518035]
+script = ExtResource("1_jl26d")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=284791331]
+visible = false
+position = Vector2(16, 40)
+texture = ExtResource("2_hlpnd")
+
+[node name="Dialogue_Manager" parent="." unique_id=845018143 instance=ExtResource("3_73or5")]
+
+[node name="Player" parent="." unique_id=42534268 instance=ExtResource("2_5s8la")]
+position = Vector2(-48, -2)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=610522489]
+limit_left = 0
+limit_top = 0
+limit_right = 1152
+limit_bottom = 608
+
+[node name="Crowd" type="Node2D" parent="." unique_id=861285326]
+visible = false
+position = Vector2(48, -80)
+
+[node name="Civ1" parent="Crowd" unique_id=1834096352 instance=ExtResource("3_p3v23")]
+position = Vector2(0, 8)
+
+[node name="Civ2" parent="Crowd" unique_id=792304492 instance=ExtResource("3_p3v23")]
+position = Vector2(-5, 2)
+
+[node name="Civ3" parent="Crowd" unique_id=321297444 instance=ExtResource("3_p3v23")]
+position = Vector2(3, 0)
+
+[node name="Criminal" parent="." unique_id=126418559 instance=ExtResource("5_73or5")]
+visible = false
+position = Vector2(48, 72)
+
+[node name="Police" type="Node2D" parent="." unique_id=505388652]
+visible = false
+position = Vector2(48, 80)
+
+[node name="Cop1" parent="Police" unique_id=2061560886 instance=ExtResource("4_hlpnd")]
+position = Vector2(-6, -4)
+
+[node name="Cop2" parent="Police" unique_id=1457107345 instance=ExtResource("4_hlpnd")]
+position = Vector2(6, 4)
+
+[node name="Cop3" parent="Police" unique_id=622064841 instance=ExtResource("4_hlpnd")]
+position = Vector2(-6, 10)

@@ -1,11 +1,13 @@
 res://_characters/Civ.tscn::14c0747ed659cf9faa6f330122c2ac3f::1771965961::res://.godot/exported/133200997/export-cf96fcc3b751fdb87386ef73c8ea058c-Civ.scn
 res://_characters/Cop.tscn::a05aacc3fc4c0ffb5bd9b876ab570773::1770296877::res://.godot/exported/133200997/export-e2af4b96ae280c55db23f042a8cf2da6-Cop.scn
 res://_characters/Criminal.tscn::137f14cb4e4d0438ab13d7b97b7528c1::1770296877::res://.godot/exported/133200997/export-915fb6e14e9107f0efe0addda682765d-Criminal.scn
-res://_characters/Player.tscn::14a92d8e4d083b605514e8d7366fb003::1770926616::res://.godot/exported/133200997/export-08915da96018baeaafbdd55a98fcc753-Player.scn
+res://_characters/Player.tscn::14a92d8e4d083b605514e8d7366fb003::1773169918::res://.godot/exported/133200997/export-08915da96018baeaafbdd55a98fcc753-Player.scn
 res://_points/Goal_Civ.tscn::216a839d9ec51793d2af8362535e4f77::1770296877::res://.godot/exported/133200997/export-e1e35c48e3fd7c7cca74746bc8315f99-Goal_Civ.scn
 res://_points/Goal_Cop.tscn::85f7b6defceeaf8d0396cfdb10c2d327::1770296877::res://.godot/exported/133200997/export-a2093cbe28057a0b18c2b68ccbec981c-Goal_Cop.scn
 res://_points/Goal_Crim.tscn::936a7a99d8efcf9084ef8f9b41d49566::1770296877::res://.godot/exported/133200997/export-a5ee6d4cfc013a162d52519ed9eecbae-Goal_Crim.scn
 res://_points/Start_Civ.tscn::5644edcb9aaf3d03a65b62b526811769::1770296877::res://.godot/exported/133200997/export-58e34ac0f3f18ae3eba36ef7856e9db5-Start_Civ.scn
-res://default_env.tres::b56e94d2e2b837e340f98e9efda46565::1773063359::res://.godot/exported/133200997/export-7cf3fd67ad9f55210191d77b582b8209-default_env.res
+res://default_env.tres::b56e94d2e2b837e340f98e9efda46565::1773226354::res://.godot/exported/133200997/export-7cf3fd67ad9f55210191d77b582b8209-default_env.res
 res://Soundplayer.tscn::40eff38e79b277ff2af2771107e4b090::1770296876::res://.godot/exported/133200997/export-d122c62edf071fb7f4a14f73907aa0d4-Soundplayer.scn
-res://World.tscn::3b6be23899a6380541c236b89d926bd1::1771966188::res://.godot/exported/133200997/export-73d50b7f59085c9a9ce28353ee849bb1-World.scn
+res://World.tscn::bc4a400d869dcbaa4d8989a400cc3139::1773226354::res://.godot/exported/133200997/export-73d50b7f59085c9a9ce28353ee849bb1-World.scn
+res://Dialogue_Manager.tscn::db384c14cd20e56133a0612f42bf3d8f::1773226187::res://.godot/exported/133200997/export-7b4dd9720db9e6576ffb29ba7925748b-Dialogue_Manager.scn
+res://Tutorial.tscn::fe248bc43b12f7dd0cc96678555365d7::1773225662::res://.godot/exported/133200997/export-3c988a37eda1be30738aa4ada50fcd4d-Tutorial.scn

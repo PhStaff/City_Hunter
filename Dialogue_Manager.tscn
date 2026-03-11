@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://gbciclreug5"]
+
+[ext_resource type="Script" uid="uid://dw50k17yr5e4x" path="res://dialogue_manager.gd" id="1_71kpd"]
+[ext_resource type="Texture2D" uid="uid://bxn0dldms3j33" path="res://_materials/tutorial_border.png" id="2_ii1id"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ii1id"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="Dialogue_Manager" type="Node" unique_id=845018143]
+script = ExtResource("1_71kpd")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=843327454]
+
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1815391464]
+offset_left = 232.0
+offset_top = 48.0
+offset_right = 840.0
+offset_bottom = 240.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ii1id")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Panel" unique_id=1817087024]
+position = Vector2(304, 96)
+texture = ExtResource("2_ii1id")
+
+[node name="Text_Label" type="Label" parent="CanvasLayer/Panel" unique_id=330248582]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 592.0
+offset_bottom = 120.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "While being unmasked you can freely walk around the cxity. As long as you don't wear your mask, people won't notice you."
+autowrap_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel" unique_id=1846545650]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 128.0
+offset_right = 601.0
+offset_bottom = 177.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Press 'Space' to continue
+Press 'Escape' to skip tutorial"

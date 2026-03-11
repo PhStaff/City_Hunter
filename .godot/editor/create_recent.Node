@@ -1,4 +1,10 @@
-RemoteTransform2D
-Camera2D
-TileMapLayer
+Node2D
 Sprite2D
+Label
+CanvasLayer
+RichTextLabel
+Panel
+Node
+Camera2D
+RemoteTransform2D
+TileMapLayer

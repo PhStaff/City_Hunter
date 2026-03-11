@@ -11,7 +11,7 @@ var SPEED = 100
 
 var direction = Vector2.ZERO
 
-var masked = true
+var masked = false
 var being_chased = false
 
 var tutorial = true

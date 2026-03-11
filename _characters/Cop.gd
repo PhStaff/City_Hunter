@@ -58,6 +58,9 @@ func move_towards_goal():
 			emit_signal("ended_chase")
 
 func set_new_path():
+	if current_target == null:
+		return
+	
 	path = NavigationServer2D.map_get_path(get_world_2d().navigation_map, global_position, current_target, false, nav_layer)
 	path_idx = 0
 
